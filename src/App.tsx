@@ -1,33 +1,37 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import './App.css'
+import React from "react";
+// import FormUser from "./FormUser";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import Navbar from "./komponen/Navbar";
+import Footer from "./komponen/Footer";
 
-import ProtectedRoute from './routes/ProtectedRoute';
-import Home from './pages/Home';
-import About from './pages/About';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
+const App: React.FC = () => (
+  <div className="flex justify-between flex-col w-screen h-screen">
+    {/* <FormUser /> */}
+    <div>
+        <Navbar />
 
-function App() {
-  return (
-  <BrowserRouter>
-    <nav style={{ marginTop:"20px" }}>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/dashboard">Dashboard</Link>
-    </nav>
-    <Routes>
-        <Route path='/' element={<Home/>}></Route>
-        <Route path='/about' element={<About/>}></Route>
-        <Route path='/login' element={<Login/>}></Route>
-        <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>}></Route>
-        <Route path='*' element={<h2>Halaman yang dicari tidak ada</h2>}></Route>
-    </Routes>
-  </BrowserRouter>
-  );
-}
+     <Routes>
+        <Route path="/about" element={<About />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        {/* <Route path="*" element={<NotFound />} /> */}
+      </Routes>
+    </div>
 
-
-export default App
+    <Footer />
+  </div>
+);
+export default App;
